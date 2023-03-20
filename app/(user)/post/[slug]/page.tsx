@@ -1,4 +1,5 @@
 import { PortableText } from "@portabletext/react";
+import { Metadata } from "next";
 import { groq } from "next-sanity";
 import Image from "next/image";
 import { RichTextComponent } from "../../../../components/RichTextComponent";
@@ -15,9 +16,7 @@ export const revalidate = 30
 
 export async function generateStaticParams() {
     const query = groq`*[_type=='post']
-    {
-        slug
-    }`
+    { slug }`
 
     const slugs: Post[] = await client.fetch(query)
     const slugRoutes = slugs.map(slug => slug.slug.current)
